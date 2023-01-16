@@ -8,7 +8,10 @@
 <h3 align="center">Automatically sends random mesage every minute</h3>
 <h4 align="center">⭐ Don't forget to leave a star! ⭐</h4>
 
-### Requirement
+### # Source
+Original source: https://github.com/yudhasaputra/discord-bot
+
+## Requirement
 * Python3
 
 ## Feature
