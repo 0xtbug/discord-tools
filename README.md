@@ -23,7 +23,7 @@ Original source: https://github.com/yudhasaputra/discord-bot
 1. Config settings and token in (https://github.com/0xtbug/discord-bot/blob/main/config.json) `config.json`
 2. Open install.bat
 3. Open start.bat
-5. In channel write `!levelup <amount of messages>`
+5. In channel write `!lp <amount of messages>`
 
 ## Linux:
 

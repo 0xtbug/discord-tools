@@ -69,7 +69,7 @@ choicec = str(input("Remove message after send? (y/n): "))
 delaytime = int(input("Enter time ex. 60 seconds = 1 minutes: "))
 
 @client.command()
-async def levelup(ctx,amount: int):
+async def lp(ctx,amount: int):
     await ctx.message.delete()
     msgsend = amount
     print(f"\n{Fore.WHITE}[ {Fore.YELLOW}? {Fore.WHITE}] {Fore.LIGHTBLACK_EX}Sending {Fore.WHITE}{msgsend}{Fore.LIGHTBLACK_EX} messages to {Fore.WHITE}{ctx.guild.name}{Fore.LIGHTBLACK_EX} server")
@@ -109,7 +109,7 @@ async def print_info():
     await client.wait_until_ready()
     print (colored('+===================== BOT START! ========================+', 'red', attrs=['bold']))
     print(f"{Fore.WHITE}[ {Fore.GREEN}! {Fore.WHITE}] {Fore.LIGHTBLACK_EX}Your username: {Fore.WHITE}{client.user.name}")
-    print(f"{Fore.WHITE}[ {Fore.GREEN}! {Fore.WHITE}] {Fore.LIGHTBLACK_EX}Write ON DISCORD: {Fore.WHITE}\n!levelup <number of messages> to Start Level UP")
+    print(f"{Fore.WHITE}[ {Fore.GREEN}! {Fore.WHITE}] {Fore.LIGHTBLACK_EX}Write ON DISCORD: {Fore.WHITE}\n!lp <number of messages> to Start Level UP")
 client.loop.create_task(print_info())
 
 async def on_command_error(ctx, error):
