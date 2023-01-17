@@ -20,14 +20,14 @@ Original source: https://github.com/yudhasaputra/discord-bot
 * You can choose remove message after send or not
 
 ## Windows:
-1. Config settings and token in (https://github.com/0xtbug/discord-bot/blob/main/config.json) `config.json`
+1. Config settings and token in (https://github.com/0xtbug/discord-tools/blob/main/config.json) `config.json`
 2. Open install.bat
 3. Open start.bat
 5. In channel write `!lp <amount of messages>`
 
 ## Linux:
 
-Config settings and token in (https://github.com/0xtbug/discord-bot/blob/main/config.json) `config.json`
+Config settings and token in (https://github.com/0xtbug/discord-tools/blob/main/config.json) `config.json`
 ~~~
 pkg install python3
 ~~~
