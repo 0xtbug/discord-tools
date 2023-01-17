@@ -75,7 +75,7 @@ async def lp(ctx,amount: int):
     msgsend = amount
     success_count = 0
     fail_count = 0
-    print(f"\n{Fore.WHITE}[ {Fore.YELLOW}? {Fore.WHITE}] {Fore.LIGHTBLACK_EX}Sending {Fore.WHITE}{msgsend}{Fore.LIGHTBLACK_EX} messages to {Fore.WHITE}{ctx.guild.name}{Fore.LIGHTBLACK_EX} server")
+    print(f"\n{Fore.WHITE}[ {Fore.YELLOW}? {Fore.WHITE}] {Fore.LIGHTBLACK_EX}Sending {Fore.WHITE}{msgsend}{Fore.LIGHTBLACK_EX} messages to {Fore.WHITE}#{ctx.channel.name}{Fore.LIGHTBLACK_EX} channel in {Fore.WHITE}{ctx.guild.name}{Fore.LIGHTBLACK_EX} server")
     print(f"{Fore.WHITE}[ {Fore.YELLOW}? {Fore.WHITE}] {Fore.LIGHTBLACK_EX}Estimated Time: {Fore.WHITE}{scale(msgsend)}\n")
     while msgsend > 0:
         try:
