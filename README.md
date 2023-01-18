@@ -33,11 +33,11 @@ pip install -r requirements.txt
 ~~~
 
 ~~~
-python3 main.py
+python3 main.py!
 ~~~
 
 ## Showcase:
 
-![gambar](https://user-images.githubusercontent.com/54710482/212695660-4b7f9a35-50ae-4654-bf41-0b14d5607aeb.png)
+![gambar](https://user-images.githubusercontent.com/54710482/213102998-01e4e745-5d7c-4c31-8472-f4b4dda1a2c3.png)
 
 `WARN: Using a selfbot is against TOS, It's not my fault if you get a ban when someone reports you`
