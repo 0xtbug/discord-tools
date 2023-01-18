@@ -100,10 +100,10 @@ async def lp(ctx,amount: int):
             print(f"{Fore.WHITE}[{Fore.GREEN}{x.strftime('%d-%m-%Y %H:%M:%S')}{Fore.WHITE}] {Fore.LIGHTBLACK_EX}Message sent! | Messages left to send: {Fore.WHITE}{msgsend} {Fore.LIGHTBLACK_EX}| Estimated Time: {Fore.WHITE}{scale(msgsend)}")
             if msgsend == 0:
                 print(f"\n{Fore.WHITE}[{Fore.GREEN}{x.strftime('%d-%m-%Y %H:%M:%S')}{Fore.WHITE}] {Fore.LIGHTBLACK_EX}All messages was sent. Successful: {Fore.WHITE}{success_count} {Fore.LIGHTBLACK_EX}| Failed: {Fore.WHITE}{fail_count}")
-            if choicel == "ID" or choicel == "id":
+            if choicel == "ID":
                 kata = read_file('kataid.txt')
                 output = random.choice(kata)
-            elif choicel == "EN" or choicel == 'en':
+            elif choicel == "EN":
                 kataen = read_file('kataen.txt')
                 output = random.choice(kataen)
             else:
