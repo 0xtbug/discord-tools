@@ -1,9 +1,5 @@
 <div align="center">
   <h3>⏫ Discord Tools - Level Up Selfbot ⏫</h3>
-  <img src="https://img.shields.io/github/issues/yudhasaputra/discord-tools"/>
-  <img src="https://img.shields.io/github/forks/yudhasaputra/discord-tools"/>
-  <img src="https://img.shields.io/github/stars/yudhasaputra/discord-tools?color=yellow"/>
-  <img src="https://img.shields.io/github/license/yudhasaputra/discord-tools"/>
  </div>
 <h3 align="center">Automatically sends random mesage every minute</h3>
 <h4 align="center">⭐ Don't forget to leave a star! ⭐</h4>
