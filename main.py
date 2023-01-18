@@ -65,9 +65,24 @@ print (colored('''Created by: YSA DEV - Recoded by 0xtbug''', 'cyan', attrs=['bo
 print (colored('============================================================', 'green', attrs=['bold']))
 print (colored(f"Ξ START           : {x.strftime('%d-%m-%Y %H:%M:%S')} \nΞ Your IP         : {ip} ", 'green', attrs=['bold']))
 print (colored('============================================================ \n', 'green', attrs=['bold']))
-choicel = str(input("Choose language ID or EN: "))
-choicec = str(input("Remove message after send? (y/n): "))
-delaytime = int(input("Enter time ex. 60 seconds = 1 minutes: "))
+while True:
+    choicel = str(input("Choose language ID or EN: ")).upper()
+    if choicel != "ID" and choicel != "EN":
+        print("Invalid input. Please enter either ID or EN.")
+    else:
+        break
+while True:
+    choicec = str(input("Remove message after send? (y/n): "))
+    if choicec != "y" and choicec != "n":
+        print("Invalid input. Please enter either y or n.")
+    else:
+        break
+while True:
+    delaytime = int(input("Enter time ex. 60 seconds = 1 minutes: "))
+    if delaytime <= 0:
+        print("Invalid input. Please enter a valid time.")
+    else:
+        break
 
 @client.command()
 async def lp(ctx,amount: int):
@@ -78,6 +93,7 @@ async def lp(ctx,amount: int):
     print(f"\n{Fore.WHITE}[ {Fore.YELLOW}? {Fore.WHITE}] {Fore.LIGHTBLACK_EX}Sending {Fore.WHITE}{msgsend}{Fore.LIGHTBLACK_EX} messages to {Fore.WHITE}#{ctx.channel.name}{Fore.LIGHTBLACK_EX} channel in {Fore.WHITE}{ctx.guild.name}{Fore.LIGHTBLACK_EX} server")
     print(f"{Fore.WHITE}[ {Fore.YELLOW}? {Fore.WHITE}] {Fore.LIGHTBLACK_EX}Estimated Time: {Fore.WHITE}{scale(msgsend)}\n")
     while msgsend > 0:
+        x = datetime.datetime.now(pytz.timezone("Asia/Jakarta"))
         try:
             msgsend -= 1
             success_count += 1
