@@ -132,6 +132,7 @@ async def print_info():
     print(f"{Fore.WHITE}[ {Fore.GREEN}! {Fore.WHITE}] {Fore.LIGHTBLACK_EX}Write ON DISCORD: {Fore.WHITE}\n!lp <number of messages> to Start Level UP")
 client.loop.create_task(print_info())
 
+@client.event
 async def on_command_error(ctx, error):
     error_str = str(error)
     error = getattr(error, 'original', error)
