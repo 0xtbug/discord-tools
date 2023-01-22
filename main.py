@@ -62,9 +62,9 @@ print (colored(result, 'yellow'))
 ip = requests.get('https://api.ipify.org').text
 x = datetime.datetime.now(pytz.timezone("Asia/Jakarta"))
 print (colored('''Created by: YSA DEV - Recoded by 0xtbug''', 'cyan', attrs=['bold']))
-print (colored('============================================================', 'green', attrs=['bold']))
+print (colored('===========================================================', 'green', attrs=['bold']))
 print (colored(f"Ξ START           : {x.strftime('%d-%m-%Y %H:%M:%S')} \nΞ Your IP         : {ip} ", 'green', attrs=['bold']))
-print (colored('============================================================ \n', 'green', attrs=['bold']))
+print (colored('=========================================================== \n', 'green', attrs=['bold']))
 while True:
     choicel = str(input("Choose language ID or EN: ")).upper()
     if choicel != "ID" and choicel != "EN":
@@ -72,8 +72,8 @@ while True:
     else:
         break
 while True:
-    choicec = str(input("Remove message after send? (y/n): "))
-    if choicec != "y" and choicec != "n":
+    choicec = str(input("Remove message after send? (y/N): ")).upper()
+    if choicec != "Y" and choicec != "N":
         print("Invalid input. Please enter either y or n.")
     else:
         break
@@ -115,12 +115,13 @@ async def lp(ctx,amount: int):
             pass
         await asyncio.sleep(1)
         async for message in ctx.message.channel.history(limit=1).filter(lambda m: m.author == client.user).map(lambda m: m):
-            try:
-                if choicec == "y" or choicec == "Y":
+            if choicec == "Y":
+                try:
                     await message.delete()
-            except:
-                print(f"{Fore.WHITE}[{Fore.RED}{x.strftime('%d-%m-%Y %H:%M:%S')}{Fore.WHITE}] {Fore.LIGHTBLACK_EX}Cannot delete message {Fore.WHITE}#{msgsend}")
-                pass
+                    print(f"{Fore.WHITE}[{Fore.GREEN}{x.strftime('%d-%m-%Y %H:%M:%S')}{Fore.WHITE}] {Fore.LIGHTBLACK_EX}Success delete message {Fore.WHITE}#{msgsend}")
+                except:
+                    print(f"{Fore.WHITE}[{Fore.RED}{x.strftime('%d-%m-%Y %H:%M:%S')}{Fore.WHITE}] {Fore.LIGHTBLACK_EX}Cannot delete message {Fore.WHITE}#{msgsend}")
+                    pass
         await asyncio.sleep(delaytime)
     return
 
