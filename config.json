@@ -1,3 +1,17 @@
 {
-  "token": "Input-Token-Here"
+  "accounts": [
+    {
+      "id": "your_discord_id",
+      "token": "your_discord_token"
+    },
+    {
+      "id": "your_discord_id",
+      "token": "your_discord_token"
+    }
+  ],
+  "telegram": {
+    "token": "your_telegram_bot_token",
+    "chat_id": "your_telegram_chat_id"
+  },
+  "is_telegram_bot": false
 }
