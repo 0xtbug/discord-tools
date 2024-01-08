@@ -1,11 +1,8 @@
 <div align="center">
   <h3>⏫ Discord Tools - Level Up Selfbot ⏫</h3>
  </div>
-<h3 align="center">Automatically sends random mesage every minute</h3>
+<h3 align="center">Automatically sends random message</h3>
 <h4 align="center">⭐ Don't forget to leave a star! ⭐</h4>
-
-### # Source
-Original source: https://github.com/yudhasaputra/discord-bot
 
 ## Requirement
 * Python3
@@ -17,15 +14,28 @@ Original source: https://github.com/yudhasaputra/discord-bot
 * Multiple Account
 * Push notification to your telegram bot
 
+## Configuration
+set Configuration settings in (https://github.com/0xtbug/discord-tools/blob/main/config.json) `config.json`
+   ```
+    "accounts": [
+      {
+        "id": "your_discord_id",
+        "token": "your_discord_token"
+      },
+      {
+        "id": "your_discord_id",
+        "token": "your_discord_token"
+      }
+      // unlimited how many accounts you want
+    ],
+   ```
+
 ## Windows:
-1. Config settings and token in (https://github.com/0xtbug/discord-tools/blob/main/config.json) `config.json`
-2. Open install.bat
-3. Open start.bat
-5. In channel write `!lp <amount of messages>`
+1. Open install.bat
+2. Open start.bat
+3. In channel write `!lp <amount of messages>`
 
 ## Linux:
-
-Config settings and token in (https://github.com/0xtbug/discord-tools/blob/main/config.json) `config.json`
 ~~~
 pkg install python3
 ~~~
@@ -57,3 +67,6 @@ set your bot configuration in (https://github.com/0xtbug/discord-tools/blob/main
 
 
 `WARN: Using a selfbot is against TOS, It's not my fault if you get a ban when someone reports you`
+
+### # Source
+Original source: https://github.com/yudhasaputra/discord-bot
