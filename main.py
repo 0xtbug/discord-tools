@@ -26,7 +26,7 @@ client.remove_command('help')
 
 def scale(time):
     defined = 60
-    for unit in ["m", "h"]:
+    for unit in ["s", "m", "h"]:
         if time < defined:
             return f"{time:.2f}{unit}"
         time /= defined
