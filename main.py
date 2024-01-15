@@ -4,6 +4,7 @@ import string
 import asyncio
 import datetime
 import requests
+import platform
 import os
 import json
 import pyfiglet
@@ -40,13 +41,15 @@ def get_user_info(user_id):
 
 def Init(token):
     if token["token"] == "token-here":
-        os.system('cls')
+        if platform.system() == 'Windows':
+            os.system('cls')
+        else:
+            os.system('clear')
         print(f"\n{Fore.WHITE}[ {Fore.RED}E {Fore.WHITE}] {Fore.LIGHTBLACK_EX}You haven't entered your token into the config.json file.\n\n"+Fore.RESET)
         exit()
     else:
         try:
             client.run(token["token"], bot=False, reconnect=True)
-            os.system(f'Discord LevelUpBot')
         except discord.errors.LoginFailure:
             print(f"\n{Fore.WHITE}[ {Fore.RED}E {Fore.WHITE}] {Fore.LIGHTBLACK_EX}Token not valid\n\n"+Fore.RESET)
 
@@ -97,11 +100,14 @@ while True:
     else:
         break
 while True:
-    delaytime = int(input("Enter time ex. 60 seconds = 1 minutes: "))
-    if delaytime <= 0:
-        print("Invalid input. Please enter a valid time.")
-    else:
-        break
+    try:
+        delaytime = int(input("Enter time ex. 60 seconds = 1 minutes: "))
+        if delaytime <= 0:
+            print("Invalid input. Please enter a valid time.")
+        else:
+            break
+    except ValueError:
+            print("Invalid input. Please enter a valid integer.")
 
 @client.command()
 async def lp(ctx, amount: int):
@@ -112,42 +118,47 @@ async def lp(ctx, amount: int):
     print(f"\n{Fore.WHITE}[ {Fore.YELLOW}? {Fore.WHITE}] {Fore.LIGHTBLACK_EX}Sending {Fore.WHITE}{msgsend}{Fore.LIGHTBLACK_EX} messages to {Fore.WHITE}#{ctx.channel.name}{Fore.LIGHTBLACK_EX} channel in {Fore.WHITE}{ctx.guild.name}{Fore.LIGHTBLACK_EX} server")
     print(f"{Fore.WHITE}[ {Fore.YELLOW}? {Fore.WHITE}] {Fore.LIGHTBLACK_EX}Estimated Time: {Fore.WHITE}{scale(msgsend)}\n")
     
-    x = datetime.datetime.now(pytz.timezone("Asia/Jakarta"))
-    try:
-        for _ in range(msgsend):
-            output = get_random_output()
-            await ctx.send(output)
-            success_count += 1
+    while msgsend > 0:
+        x = datetime.datetime.now(pytz.timezone("Asia/Jakarta"))
+        try:
             msgsend -= 1
+            success_count += 1
             print(f"{Fore.WHITE}[{Fore.GREEN}{x.strftime('%d-%m-%Y %H:%M:%S')}{Fore.WHITE}] {Fore.LIGHTBLACK_EX}Message sent! | Messages left to send: {Fore.WHITE}{msgsend} {Fore.LIGHTBLACK_EX}| Estimated Time: {Fore.WHITE}{scale(msgsend)}")
-            await asyncio.sleep(1)
-            if choicec == "Y":
-                async for message in ctx.message.channel.history(limit=1).filter(lambda m: m.author == client.user).map(lambda m: m):
-                    try:
-                        await message.delete()
-                        print(f"{Fore.WHITE}[{Fore.GREEN}{x.strftime('%d-%m-%Y %H:%M:%S')}{Fore.WHITE}] {Fore.LIGHTBLACK_EX}Success delete message {Fore.WHITE}#{msgsend}")
-                    except:
-                        print(f"{Fore.WHITE}[{Fore.RED}{x.strftime('%d-%m-%Y %H:%M:%S')}{Fore.WHITE}] {Fore.LIGHTBLACK_EX}Cannot delete message {Fore.WHITE}#{msgsend}")
-                        pass
-            await asyncio.sleep(delaytime)
-    except Exception as e:
-        fail_count += 1
-        print(f"{Fore.WHITE}[{Fore.RED}{x.strftime('%d-%m-%Y %H:%M:%S')}{Fore.WHITE}] {Fore.LIGHTBLACK_EX}Error: {e} | Cannot send message {Fore.WHITE}#{msgsend}")
-    if is_telegram_bot:
-        await send_telegram_message(ctx, config["telegram"]["token"], config["telegram"]["chat_id"], success_count, fail_count)
-    else:
-        print(f"\n[{x.strftime('%d-%m-%Y %H:%M:%S')}] All messages have been sent. Successful: {success_count} | Failed: {fail_count}")
-        return
 
-def get_random_output():
-    if choicel == "ID":
-        kata = read_file('kataid.txt')
-        return random.choice(kata)
-    elif choicel == "EN":
-        kataen = read_file('kataen.txt')
-        return random.choice(kataen)
-    else:
-        return "Invalid input"
+            if msgsend == 0:
+                print(f"\n{Fore.WHITE}[{Fore.GREEN}{x.strftime('%d-%m-%Y %H:%M:%S')}{Fore.WHITE}] {Fore.LIGHTBLACK_EX}All messages were sent. Successful: {Fore.WHITE}{success_count} {Fore.LIGHTBLACK_EX}| Failed: {Fore.WHITE}{fail_count}")
+                break
+                if is_telegram_bot:
+                    await send_telegram_message(ctx, config["telegram"]["token"], config["telegram"]["chat_id"], success_count, fail_count)
+                break
+            if choicel == "ID":
+                kata = read_file('kataid.txt')
+                output = random.choice(kata)
+            elif choicel == "EN":
+                kataen = read_file('kataen.txt')
+                output = random.choice(kataen)
+            else:
+                output = "Invalid input"
+            await ctx.send(output)
+
+        except Exception as e:
+            fail_count += 1
+            print(f"{Fore.WHITE}[{Fore.RED}{x.strftime('%d-%m-%Y %H:%M:%S')}{Fore.WHITE}] {Fore.LIGHTBLACK_EX}Cannot send message {Fore.WHITE}#{msgsend}, Error: {e}")
+            pass
+        for remaining_time in range(delaytime, -1, -1):
+            seconds_display = remaining_time if remaining_time >= 10 else f"0{remaining_time}"
+            print(f"{Fore.WHITE}[{Fore.YELLOW}{x.strftime('%d-%m-%Y %H:%M:%S')}{Fore.WHITE}] {Fore.LIGHTBLACK_EX}Please wait: {Fore.WHITE}{seconds_display} seconds", end='\r')
+            await asyncio.sleep(1)
+        async for message in ctx.message.channel.history(limit=1).filter(lambda m: m.author == client.user).map(lambda m: m):
+            if choicec == "Y":
+                try:
+                    await message.delete()
+                    print(f"{Fore.WHITE}[{Fore.GREEN}{x.strftime('%d-%m-%Y %H:%M:%S')}{Fore.WHITE}] {Fore.LIGHTBLACK_EX}Success delete message {Fore.WHITE}#{msgsend}")
+                except:
+                    print(f"{Fore.WHITE}[{Fore.RED}{x.strftime('%d-%m-%Y %H:%M:%S')}{Fore.WHITE}] {Fore.LIGHTBLACK_EX}Cannot delete message {Fore.WHITE}#{msgsend}")
+                    pass
+    await client.close()
+    sys.exit(0)
 
 async def send_telegram_message(ctx, token, chat_id, success_count, fail_count):
     guild_name = ctx.guild.name if ctx.guild else "Unknown Guild"
@@ -163,9 +174,9 @@ async def send_telegram_message(ctx, token, chat_id, success_count, fail_count):
 
     response = requests.post(url, data=payload)
     if response.status_code == 200:
-        print(f"\n[Telegram] Message successfully sent to Telegram.")
+        print(f"\n{Fore.WHITE}[{Fore.GREEN}{x.strftime('%d-%m-%Y %H:%M:%S')}{Fore.WHITE}] {Fore.LIGHTBLACK_EX}Message successfully sent to {Fore.WHITE}Telegram")
     else:
-        print(f"\n[Telegram] Failed to send message to Telegram. (Status code: {response.status_code})")
+        print(f"\n{Fore.WHITE}[{Fore.RED}{x.strftime('%d-%m-%Y %H:%M:%S')}{Fore.WHITE}] {Fore.LIGHTBLACK_EX}Failed to send message to {Fore.WHITE}Telegram. {Fore.LIGHTBLACK_EX}(Status code: {Fore.RED}{response.status_code})")
 
 @client.event
 async def print_info():
